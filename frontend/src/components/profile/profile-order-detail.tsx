@@ -68,19 +68,8 @@ export default function ProfileOrderDetail() {
                 key: 'comment',
                 label: 'Ваш комментарий к заказу',
                 extraClass: styles.profile__gridRowFullWidth,
-                render: (dataInfo: OrderData) => (
-                    <>
-                        {dataInfo.comment ? (
-                            <div
-                                dangerouslySetInnerHTML={{
-                                    __html: dataInfo.comment,
-                                }}
-                            />
-                        ) : (
-                            'Комментариев нет'
-                        )}
-                    </>
-                ),
+                render: (dataInfo: OrderData) =>
+                    dataInfo.comment || 'Комментариев нет',
             },
         ],
         [orderData]
