@@ -36,7 +36,7 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
 const getCsrfToken = (_req: Request, res: Response) => {
     const csrfToken = crypto.randomBytes(32).toString('hex')
 
-    res.cookie('csrfToken', csrfToken, {
+    res.cookie('_csrf', csrfToken, {
         httpOnly: true,
         sameSite: 'lax',
         secure: false,
