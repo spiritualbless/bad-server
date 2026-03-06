@@ -32,6 +32,20 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
     }
 }
 
+// GET /auth/csrf-token
+const getCsrfToken = (_req: Request, res: Response) => {
+    const csrfToken = crypto.randomBytes(32).toString('hex')
+
+    res.cookie('_csrf', csrfToken, {
+        httpOnly: true,
+        sameSite: 'lax',
+        secure: false,
+        path: '/',
+    })
+
+    return res.json({ csrfToken })
+}
+
 // POST /auth/register
 const register = async (req: Request, res: Response, next: NextFunction) => {
     try {
@@ -207,6 +221,7 @@ const updateCurrentUser = async (
 }
 
 export {
+    getCsrfToken,
     getCurrentUser,
     getCurrentUserRoles,
     login,

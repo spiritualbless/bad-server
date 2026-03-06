@@ -13,3 +13,7 @@ docker compose up -d
 6. Админка находится по адресу http://localhost/admin/
 
 https://github.com/spiritualbless/bad-server#
+
+Ярослав Свахин (spiritualbless)
+39 когорта
+фулстек расширенный

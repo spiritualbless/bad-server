@@ -19,9 +19,13 @@ export default defineConfig({
   css: {
     preprocessorOptions: {
       scss: {
+        // @ts-ignore extra options for modern Sass compiler
+        api: 'modern-compiler',
+        // @ts-ignore configure Sass load paths
+        loadPaths: ['src/scss'],
         additionalData: `
-          @use "./src/scss/variables" as *;
-          @use "./src/scss/mixins";
+          @use "variables" as *;
+          @use "mixins/index" as mixins;
         `,
       },
 
