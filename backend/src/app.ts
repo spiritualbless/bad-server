@@ -16,12 +16,12 @@ const app = express()
 
 const apiLimiter = rateLimit({
     windowMs: 15 * 60 * 1000,
-    max: 100,
+    max: 20,
 })
 
 const authLimiter = rateLimit({
     windowMs: 15 * 60 * 1000,
-    max: 20,
+    max: 10,
 })
 
 app.use(cookieParser())
@@ -35,8 +35,17 @@ app.use(
 
 app.use(serveStatic(path.join(__dirname, 'public')))
 
-app.use(urlencoded({ extended: true }))
-app.use(json())
+app.use(
+    urlencoded({
+        extended: true,
+        limit: '1mb',
+    })
+)
+app.use(
+    json({
+        limit: '1mb',
+    })
+)
 
 app.use('/auth', authLimiter)
 app.use(apiLimiter)
