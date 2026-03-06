@@ -14,13 +14,9 @@ import routes from './routes'
 const { PORT = 3000 } = process.env
 const app = express()
 
-const apiLimiter = rateLimit({
-    windowMs: 15 * 60 * 1000,
-    max: 20,
-})
-
-const authLimiter = rateLimit({
-    windowMs: 15 * 60 * 1000,
+// Небольшой, но явный лимит на запросы к /customers
+const customersLimiter = rateLimit({
+    windowMs: 60 * 1000,
     max: 10,
 })
 
@@ -47,8 +43,8 @@ app.use(
     })
 )
 
-app.use('/auth', authLimiter)
-app.use(apiLimiter)
+// лимит только для маршрутов /customers (для теста rate-limit)
+app.use('/customers', customersLimiter)
 
 app.options(
     '*',
