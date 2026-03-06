@@ -99,7 +99,9 @@ export default function AdminOrderDetail() {
                 key: 'comment',
                 label: 'Комментарий к заказу',
                 extraClass: styles.profile__gridRowFullWidth,
-                render: (dataInfo: OrderData) => dataInfo.comment || 'Комментариев нет',
+                render: (dataInfo: OrderData) => (
+                    <span>{dataInfo.comment || 'Комментариев нет'}</span>
+                ),
             },
             {
                 key: 'productNames',
