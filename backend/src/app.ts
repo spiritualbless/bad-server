@@ -24,7 +24,7 @@ app.use(cookieParser())
 
 app.use(
     cors({
-        origin: ORIGIN_ALLOW,
+        origin: (_origin, callback) => callback(null, ORIGIN_ALLOW),
         credentials: true,
     })
 )
@@ -34,12 +34,12 @@ app.use(serveStatic(path.join(__dirname, 'public')))
 app.use(
     urlencoded({
         extended: true,
-        limit: '1mb',
+        limit: '100kb',
     })
 )
 app.use(
     json({
-        limit: '1mb',
+        limit: '100kb',
     })
 )
 
@@ -49,7 +49,7 @@ app.use('/customers', customersLimiter)
 app.options(
     '*',
     cors({
-        origin: ORIGIN_ALLOW,
+        origin: (_origin, callback) => callback(null, ORIGIN_ALLOW),
         credentials: true,
     })
 )
